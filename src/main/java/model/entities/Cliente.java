@@ -4,6 +4,7 @@ public class Cliente {
 
 	private String nome,email,senha;
 	private int id,cpf,tell;
+	
 	public String getNome() {
 		return nome;
 	}

@@ -25,6 +25,8 @@ public class Main {
 				case 1:
 					break;
 				case 2:
+					Cadastro cadastro = new Cadastro();
+					cadastro.GerarCliente();
 					break;
 				default:
 					break;
