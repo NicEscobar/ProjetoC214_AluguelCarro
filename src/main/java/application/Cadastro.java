@@ -27,7 +27,7 @@ public class Cadastro {
 		System.out.println("Senha;");
 		cliente.setSenha(teclado.nextLine());
 		System.out.println("CPF:");
-		cliente.setCpf(teclado.nextInt());
+		cliente.setCpf(teclado.nextLine());
 		System.out.println("Telefone;");
 		cliente.setTell(teclado.nextInt());
 		

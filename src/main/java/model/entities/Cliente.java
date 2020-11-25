@@ -2,8 +2,10 @@ package model.entities;
 
 public class Cliente {
 
-	private String nome,email,senha;
-	private int id,cpf,tell;
+	private String nome,email,senha,cpf;
+	private float id,tell;
+	
+	Carro carro = new Carro();
 	
 	public String getNome() {
 		return nome;
@@ -23,24 +25,31 @@ public class Cliente {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public int getId() {
+	public float getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public int getTell() {
+	public float getTell() {
 		return tell;
 	}
 	public void setTell(int tell) {
 		this.tell = tell;
 	}
+	public Carro getCarro() {
+		return carro;
+	}
+	public void setCarro(Carro carro) {
+		this.carro = carro;
+	}
+	
 	
 	
 }
