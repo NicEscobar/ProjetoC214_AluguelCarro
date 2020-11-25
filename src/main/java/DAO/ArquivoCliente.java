@@ -22,17 +22,17 @@ public class ArquivoCliente {
 	//Procura o email do  cliente no arquivo
 	public Cliente procurarJson(String email) {
 		
+		Gson gson = new Gson();
+		
 		try {
 				
-			br = new BufferedReader(new FileReader("cliente.json"));
-			
-			while(br.ready()) {
+			/*while(br.ready()) {
 				String linha = br.readLine();
 				
 				if(linha.contains(email)) {
 					System.out.println(email);
 				}
-			}
+			}*/
 			br.close();
 			return cliente;
 			
