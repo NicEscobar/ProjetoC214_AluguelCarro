@@ -1,31 +1,25 @@
 package application;
 
-import java.util.Scanner;
-
 import DAO.Arquivo;
-import model.entities.Cliente;
+import entidade.Cliente;
 
 public class Login {
 	
-	Scanner teclado = new Scanner(System.in);
 	Cliente cliente = new Cliente();
 	Arquivo arquivo = new Arquivo();
 	
 	
-	public void verificar() {
+	public Cliente verificarLogin(String email, String senha) {
 		
-		arquivo.procurar(cliente.getEmail());
+		cliente = arquivo.procurarJson(email);
 		
-	}
-	
-	public void inserir() {	
+		if(cliente != null) {
+			if (cliente.getSenha() == senha) {
+				return cliente;
+			}
+		}
 		
-		System.out.println("E-mail;");
-		cliente.setEmail(teclado.nextLine());
-		System.out.println("Senha;");
-		cliente.setSenha(teclado.nextLine());	
-		
-		verificar();
+		return null;
 	}
 	
 	

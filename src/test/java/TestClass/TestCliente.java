@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.entities.Carro;
-import model.entities.Cliente;
+import entidade.Carro;
+import entidade.Cliente;
 
 public class TestCliente {
 
