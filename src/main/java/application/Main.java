@@ -23,10 +23,12 @@ public class Main {
 					op = 0;
 					break;
 				case 1:
+					Login login = new Login();
+					login.inserir();
 					break;
 				case 2:
 					Cadastro cadastro = new Cadastro();
-					cadastro.GerarCliente();
+					cadastro.gerarCliente();
 					break;
 				default:
 					break;

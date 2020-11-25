@@ -1,42 +1,24 @@
 package application;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Scanner;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
+import DAO.Arquivo;
 import model.entities.Cliente;
 
 public class Cadastro {
 	
 	Cliente cliente;
-	FileWriter fileWriter;
 	Scanner teclado = new Scanner(System.in);
+	Arquivo arquivo;
 	
 	public Cadastro() {	
+		
 		cliente = new Cliente();
+		arquivo = new Arquivo();
 		
 	}
-
-	public void GerarJson() {
-		if(cliente != null) {
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			String json = gson.toJson(cliente);
-				
-			try {
-				fileWriter = new FileWriter("cliente.json", true);
-				fileWriter.write(json);
-				fileWriter.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-		}
-	}
 	
-	public void GerarCliente() {
+	public void gerarCliente() {
 		
 		System.out.println("Nome;");
 		cliente.setNome(teclado.nextLine());
@@ -49,8 +31,8 @@ public class Cadastro {
 		System.out.println("Telefone;");
 		cliente.setTell(teclado.nextInt());
 		
-			
-		GerarJson();
+		arquivo.gerarJson(cliente);
+				
 	}
 	
 
