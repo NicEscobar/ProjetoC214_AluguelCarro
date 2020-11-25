@@ -4,6 +4,7 @@ public class Carro {
 
 	private String modelo,marca,info,placa;
 	private int id;
+	private boolean alugado;
 	
 	public String getModelo() {
 		return modelo;
@@ -20,18 +21,19 @@ public class Carro {
 	public String getInfo() {
 		return info;
 	}
-	public void setInfo(String info) {
-		this.info = info;
-	}
 	public String getPlaca() {
 		return placa;
-	}
-	public void setPlaca(String placa) {
-		this.placa = placa;
 	}
 	public int getId() {
 		return id;
 	}
+	public boolean isAlugado() {
+		return alugado;
+	}
+	public void setAlugado(boolean alugado) {
+		this.alugado = alugado;
+	}
+	
 	
 	
 }

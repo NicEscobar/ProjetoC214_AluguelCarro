@@ -1,14 +1,14 @@
 package application;
 
-import DAO.Arquivo;
+import DAO.ArquivoCliente;
 import entidade.Cliente;
 
 public class Login {
 	
 	Cliente cliente = new Cliente();
-	Arquivo arquivo = new Arquivo();
+	ArquivoCliente arquivo = new ArquivoCliente();
 	
-	
+	//Verifica se o cliente foi cadastrado e existe no arquivo 
 	public Cliente verificarLogin(String email, String senha) {
 		
 		cliente = arquivo.procurarJson(email);

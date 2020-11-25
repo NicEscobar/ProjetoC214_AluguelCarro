@@ -10,15 +10,16 @@ import com.google.gson.GsonBuilder;
 
 import entidade.Cliente;
 
-public class Arquivo {
+public class ArquivoCliente {
 	
 	FileWriter fileWriter;
 	FileReader fileReader;
 	BufferedReader br;
 	Cliente cliente = new Cliente();
 	
-	public Arquivo() {}
+	public ArquivoCliente() {}
 	
+	//Procura o email do  cliente no arquivo
 	public Cliente procurarJson(String email) {
 		
 		try {
@@ -46,6 +47,7 @@ public class Arquivo {
 	
 	}
 	
+	//Gera o arquivo json e adiciona o cliente no arquivo
 	public void gerarJson(Cliente cliente) 
 	{
 		if(cliente != null) {
@@ -65,8 +67,10 @@ public class Arquivo {
 		}
 	}
 	
+	//Edita o cliente salvo no arquivo
 	public void editarJson(Cliente cliente) {}
 	
+	//Deleta o cliente do arquivo
 	public void deletarJson() {
 		
 	}

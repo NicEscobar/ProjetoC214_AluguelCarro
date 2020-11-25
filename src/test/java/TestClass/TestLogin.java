@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import DAO.Arquivo;
+import DAO.ArquivoCliente;
 import TesteContante.ClienteConstante;
 import application.Login;
 import entidade.Cliente;
@@ -20,7 +20,7 @@ import entidade.Cliente;
 public class TestLogin {
 
 	@Mock 
-	Arquivo arquivo; //Classe que vai ser mokada
+	ArquivoCliente arquivo; //Classe que vai ser mokada
 	
 	@InjectMocks
 	Login login; //Injetando a classe de serviço

@@ -39,8 +39,6 @@ public class TestCliente {
 		
 		carro.setMarca("Ford");
 		carro.setModelo("Hylux");
-		carro.setPlaca("AB-28");
-		carro.setInfo("Ar-condicionado");
 		
 		cliente.setCarro(carro);
 		

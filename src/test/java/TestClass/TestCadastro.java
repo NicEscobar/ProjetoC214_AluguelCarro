@@ -9,7 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import DAO.Arquivo;
+import DAO.ArquivoCliente;
 import application.Cadastro;
 import entidade.Carro;
 import entidade.Cliente;
@@ -18,7 +18,7 @@ import entidade.Cliente;
 public class TestCadastro {
 
 	@Mock 
-	Arquivo arquivo; //Classe que vai ser mokada
+	ArquivoCliente arquivo; //Classe que vai ser mokada
 	
 	@InjectMocks
 	Cadastro cadastro; //Injetando a classe de serviço
@@ -49,8 +49,6 @@ public class TestCadastro {
 		
 		carro.setMarca("Ford");
 		carro.setModelo("Hylux");
-		carro.setPlaca("AB-12");
-		carro.setInfo("Ar-Condicionado");
 		
 		cliente.setCarro(carro);
 		
