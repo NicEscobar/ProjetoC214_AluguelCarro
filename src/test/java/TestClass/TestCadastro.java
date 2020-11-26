@@ -11,7 +11,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import DAO.ArquivoCliente;
 import application.Cadastro;
-import entidade.Carro;
 import entidade.Cliente;
 
 @RunWith(MockitoJUnitRunner.class)
