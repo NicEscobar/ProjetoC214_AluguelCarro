@@ -28,8 +28,8 @@ public class TestLogin {
 	@Test
 	public void testeInsert() {
 		
-		String email = "nicole@";
-		String senha = "1234";
+		//String email = "nicole@";
+		//String senha = "1234";
 		
 		//Mockito.when(arquivo.procurarJson(email)).thenReturn(ClienteConstante.Cliente);
 		
