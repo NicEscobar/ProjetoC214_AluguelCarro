@@ -11,7 +11,7 @@ public class CarroManager extends TableManager<Carro> {
 	public CarroManager() {
 		super("CREATE TABLE IF NOT EXISTS carros(" + "placa VARCHAR PRIMARY KEY, " + "marca VARCHAR NOT NULL, "
 				+ "modelo VARCHAR NOT NULL, " + "aluguel REAL NOT NULL, " + "clienteCPF VARCHAR, "
-				+ "FOREIGN KEY(clienteCPF) REFERENCES clientes(cpf) " + ")");
+				+ "FOREIGN KEY(clienteCPF) REFERENCES clientes(CPF) " + ")");
 	}
 
 	public ArrayList<Carro> buscarTodos() throws SQLException {

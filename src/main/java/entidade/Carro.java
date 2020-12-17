@@ -42,8 +42,7 @@ public class Carro {
 
 	@Override
 	public String toString() {
-		return "Carro: \n" + "Modelo: " + modelo + "\n" + "Marca: " + marca + "\n" + "Placa: " + placa + "\n"
-				+ "Modelo: " + modelo + "\n" + "Alguel: " + aluguel + "\n" + "Cliente: " + clienteCPF;
+		return modelo;
 	}
 
 }

@@ -8,11 +8,16 @@ import database.CarroManager;
 import database.ClienteManager;
 import entidade.Carro;
 import entidade.Cliente;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application {
 
-	private static CarroManager carroManager;
-	private static ClienteManager clienteManager;
+	public static CarroManager carroManager;
+	public static ClienteManager clienteManager;
 
 	private static void startDatabase() {
 		Banco.conectar("banco");
@@ -89,19 +94,35 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+				
 		startDatabase();
 
 		// --- Extra ---
 		registerCars();
 		registerClients();
 
-		rentCar();
+		//rentCar();
 
-		printClients();
-		printCars();
+		//printClients();
+		//printCars();
 		// -------------
-
+		
+		launch(args);
+		
 		Banco.desconectar();
+		
+	}
+
+	@Override
+	public void start(Stage stage) throws Exception {
+		Parent root = FXMLLoader.load(this.getClass().getResource("/view/FXMLTelaLogin.fxml"));
+
+		Scene scene = new Scene(root);
+
+		stage.setScene(scene);
+		stage.setTitle("Login");
+		stage.show();
+
 	}
 
 }

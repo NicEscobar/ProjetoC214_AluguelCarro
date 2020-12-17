@@ -11,6 +11,7 @@ public abstract class TableManager<T> {
 	
 	TableManager (String query) {
 		criarTabela(query);
+		System.out.println(query);
 	}
 	
 	private void criarTabela(String query) {

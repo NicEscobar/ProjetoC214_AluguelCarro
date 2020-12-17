@@ -11,7 +11,7 @@ import entidade.Cliente;
 public class ClienteManager extends TableManager<Cliente> {
 
 	public ClienteManager() {
-		super("CREATE TABLE IF NOT EXISTS clientes(" + "cpf VARCHAR PRIMARY KEY, " + "nome VARCHAR NOT NULL, "
+		super("CREATE TABLE IF NOT EXISTS clientes(" + "CPF VARCHAR PRIMARY KEY, " + "nome VARCHAR NOT NULL, "
 				+ "email VARCHAR NOT NULL, " + "senha VARCHAR NOT NULL, " + "telefone VARCHAR, "
 				+ "carroPlaca VARCHAR");
 	}
