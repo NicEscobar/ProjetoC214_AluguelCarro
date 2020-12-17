@@ -2,45 +2,53 @@ package model.entities;
 
 public class Cliente {
 
-	private String nome,email,senha;
-	private int id,cpf,tell;
-	
+	private String nome, email, senha, CPF, telefone, carroPlaca;
+
+	public Cliente(String CPF, String nome, String email, String senha, String telefone, String carroPlaca) {
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.CPF = CPF;
+		this.telefone = telefone;
+		this.carroPlaca = carroPlaca;
+	}
+
+	public Cliente(String CPF, String nome, String email, String senha, String telefone) {
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.CPF = CPF;
+		this.telefone = telefone;
+	}
+
 	public String getNome() {
 		return nome;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+
 	public String getEmail() {
 		return email;
 	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+
 	public String getSenha() {
 		return senha;
 	}
-	public void setSenha(String senha) {
-		this.senha = senha;
+
+	public String getCPF() {
+		return CPF;
 	}
-	public int getId() {
-		return id;
+
+	public String getTelefone() {
+		return telefone;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public String getCarroPlaca() {
+		return carroPlaca;
 	}
-	public int getCpf() {
-		return cpf;
+
+	@Override
+	public String toString() {
+		return "Cliente: " + "Nome: " + nome + "\n" + "CPF: " + CPF + "\n" + "Email: " + email + "\n" + "Telefone: "
+				+ telefone + "\n" + "Carro: " + carroPlaca;
 	}
-	public void setCpf(int cpf) {
-		this.cpf = cpf;
-	}
-	public int getTell() {
-		return tell;
-	}
-	public void setTell(int tell) {
-		this.tell = tell;
-	}
-	
-	
+
 }

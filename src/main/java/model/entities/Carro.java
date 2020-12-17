@@ -2,36 +2,48 @@ package model.entities;
 
 public class Carro {
 
-	private String modelo,marca,info,placa;
-	private int id;
-	
+	private String modelo, marca, placa, clienteCPF;
+	private double aluguel;
+
+	public Carro(String placa, String modelo, String marca, double aluguel, String clienteCPF) {
+		this.modelo = modelo;
+		this.marca = marca;
+		this.placa = placa;
+		this.clienteCPF = clienteCPF;
+		this.aluguel = aluguel;
+	}
+
+	public Carro(String placa, String modelo, String marca, double aluguel) {
+		this.modelo = modelo;
+		this.marca = marca;
+		this.placa = placa;
+		this.aluguel = aluguel;
+	}
+
 	public String getModelo() {
 		return modelo;
 	}
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
+
 	public String getMarca() {
 		return marca;
 	}
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-	public String getInfo() {
-		return info;
-	}
-	public void setInfo(String info) {
-		this.info = info;
-	}
+
 	public String getPlaca() {
 		return placa;
 	}
-	public void setPlaca(String placa) {
-		this.placa = placa;
+
+	public String getClienteCPF() {
+		return clienteCPF;
 	}
-	public int getId() {
-		return id;
+
+	public double getAluguel() {
+		return aluguel;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Carro: \n" + "Modelo: " + modelo + "\n" + "Marca: " + marca + "\n" + "Placa: " + placa + "\n"
+				+ "Modelo: " + modelo + "\n" + "Alguel: " + aluguel + "\n" + "Cliente: " + clienteCPF;
+	}
+
 }
