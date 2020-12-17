@@ -1,4 +1,4 @@
-package model.entities;
+package entidade;
 
 public class Cliente {
 
@@ -50,5 +50,4 @@ public class Cliente {
 		return "Cliente: " + "Nome: " + nome + "\n" + "CPF: " + CPF + "\n" + "Email: " + email + "\n" + "Telefone: "
 				+ telefone + "\n" + "Carro: " + carroPlaca;
 	}
-
 }

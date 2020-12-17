@@ -4,8 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.entities.Carro;
-import model.entities.Cliente;
+
+import entidade.Carro;
+import entidade.Cliente;
 
 public class ClienteManager extends TableManager<Cliente> {
 

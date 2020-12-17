@@ -2,13 +2,12 @@ package application;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import database.Banco;
 import database.CarroManager;
 import database.ClienteManager;
-import model.entities.Carro;
-import model.entities.Cliente;
+import entidade.Carro;
+import entidade.Cliente;
 
 public class Main {
 
@@ -32,22 +31,23 @@ public class Main {
 			System.out.println("Failed to register cars:" + e);
 		}
 	}
-	
+
 	private static void registerClients() {
 		try {
-			clienteManager.inserir(new Cliente("00000000000", "Gustavo Pessa", "guga@teste.com", "123456", "3599999999"));
+			clienteManager
+					.inserir(new Cliente("00000000000", "Gustavo Pessa", "guga@teste.com", "123456", "3599999999"));
 		} catch (SQLException e) {
 			System.out.println("Failed to register users:" + e);
 		}
 	}
-	
+
 	private static void rentCar() {
 		try {
 			Cliente logedIn = clienteManager.login("guga@teste.com", "123456");
 			Carro carro = carroManager.buscarDisponiveis().get(0);
-			
+
 			clienteManager.alugarCarro(logedIn, carro);
-			
+
 			System.out.println("Carro Alugado:");
 			System.out.println(clienteManager.buscarPrimeiro(logedIn.getCPF()));
 			System.out.println(carroManager.buscarPrimeiro(carro.getPlaca()));
@@ -56,12 +56,12 @@ public class Main {
 			System.out.println("Failed to rent:" + e);
 		}
 	}
-	
+
 	private static void printCars() {
 		System.out.println("--- Carros ---");
 		try {
 			ArrayList<Carro> carros = carroManager.buscarTodos();
-			
+
 			for (Carro carro : carros) {
 				System.out.println(carro);
 				System.out.println("---");
@@ -71,14 +71,14 @@ public class Main {
 		}
 		System.out.println();
 	}
-	
+
 	private static void printClients() {
 		System.out.println("--- Clientes ---");
 		try {
-			
+
 			ArrayList<Cliente> clientes = clienteManager.buscarTodos();
-			
-			for (Cliente cliente: clientes) {
+
+			for (Cliente cliente : clientes) {
 				System.out.println(cliente);
 				System.out.println("---");
 			}
@@ -90,17 +90,17 @@ public class Main {
 
 	public static void main(String[] args) {
 		startDatabase();
-		
+
 		// --- Extra ---
 		registerCars();
 		registerClients();
-		
+
 		rentCar();
-		
+
 		printClients();
 		printCars();
 		// -------------
-		
+
 		Banco.desconectar();
 	}
 

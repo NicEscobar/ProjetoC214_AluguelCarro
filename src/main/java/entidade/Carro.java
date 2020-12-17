@@ -1,4 +1,4 @@
-package model.entities;
+package entidade;
 
 public class Carro {
 

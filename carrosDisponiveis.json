@@ -1,0 +1,22 @@
+{
+  "marca": "Ford",
+  "modelo": "Hylux",
+  "placa": "AB-12",
+  "id": 0,
+  "informacao": "Ar-Condicionado, Câmera de ré, Auto",
+  "alugado": false,
+}{
+  "marca": "Volkswagen",
+  "modelo": "Gol",
+  "placa": "CD-42",
+  "id": 1,
+  "informacao": "Ar-Condicionado, Manual",
+  "alugado": false,
+}{
+  "marca": "Volkswagen",
+  "modelo": "Amarok",
+  "placa": "FG-18",
+  "id": 2,
+  "informacao": "Ar-Condicionado, Auto",
+  "alugado": false,
+}

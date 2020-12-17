@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.entities.Carro;
+import entidade.Carro;
 
 public class CarroManager extends TableManager<Carro> {
 
