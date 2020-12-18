@@ -54,7 +54,6 @@ public class TelaLogin {
 			if (cliente == null) {
 				erroLogin.setTitle("Erro de Login");
 				erroLogin.setHeaderText("Cliente não encontrado!");
-				// erroLogin.setContentText("Favor, entre com os dados necessários");
 				erroLogin.showAndWait();
 			} else {				
 
@@ -78,10 +77,6 @@ public class TelaLogin {
 				}
 			}
 		}
-		/*
-		 * Stage stageAtual = (Stage) txtEmail.getScene().getWindow();
-		 * stageAtual.close();
-		 */
 	}
 
 	@FXML

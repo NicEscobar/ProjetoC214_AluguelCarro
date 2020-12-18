@@ -1,8 +1,11 @@
 package view;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import application.ClienteHolder;
+import application.Main;
+import entidade.Carro;
 import entidade.Cliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,10 +33,22 @@ public class TelaPerfil {
 	private Label lblTEL;
 
 	@FXML
+	private Label lblModelo;
+
+	@FXML
+	private Label lblMarca;
+
+	@FXML
+	private Label lblPlaca;
+
+	@FXML
 	private Button botaoSair;
 
 	@FXML
 	private Button botaoAlugar;
+
+	@FXML
+	private Button botaoDevolver;
 
 	private Cliente cliente = ClienteHolder.getInstance().getCliente();
 
@@ -56,14 +71,63 @@ public class TelaPerfil {
 			stage.show();
 		} finally {
 		}
-	}
-	
-	@FXML
-	public void initialize() {
-		lblNome.setText(cliente.getNome());
-		lblEmail.setText(cliente.getEmail());
-		lblCPF.setText(cliente.getCPF());
-		lblTEL.setText(cliente.getTelefone());
+
+		Stage stage = (Stage) botaoSair.getScene().getWindow();
+		stage.close();
 	}
 
+	@FXML
+	public void acaoBotaoDevolver(ActionEvent event) throws IOException {
+		try {
+			Cliente clientAux = Main.clienteManager.buscarPrimeiro(cliente.getCPF());
+			Main.clienteManager.devolverCarro(clientAux);
+
+			lblMarca.setText("N/A");
+			lblPlaca.setText("N/A");
+			lblModelo.setText("N/A");
+			
+			botaoAlugar.setVisible(true);
+			botaoAlugar.setManaged(true);
+			botaoDevolver.setVisible(false);
+			botaoDevolver.setManaged(false);
+						
+		} catch (SQLException e) {
+
+		}
+	}
+
+	@FXML
+	public void initialize() {
+		try {
+			Cliente clientAux = Main.clienteManager.buscarPrimeiro(cliente.getCPF());
+
+			lblNome.setText(clientAux.getNome());
+			lblEmail.setText(clientAux.getEmail());
+			lblCPF.setText(clientAux.getCPF());
+			lblTEL.setText(clientAux.getTelefone());
+
+			if (clientAux.getCarroPlaca() != null) {
+				
+				botaoAlugar.setVisible(false);
+				botaoAlugar.setManaged(false);
+				botaoDevolver.setVisible(true);
+				botaoDevolver.setManaged(true);
+				
+				Carro carro = Main.carroManager.buscarPrimeiro(clientAux.getCarroPlaca());
+
+				if (carro != null) {
+					lblMarca.setText(carro.getMarca());
+					lblPlaca.setText(carro.getPlaca());
+					lblModelo.setText(carro.getModelo());					
+				}
+			}else {
+				botaoAlugar.setVisible(true);
+				botaoAlugar.setManaged(true);
+				botaoDevolver.setVisible(false);
+				botaoDevolver.setManaged(false);
+			}
+		} catch (SQLException e) {
+		}
+
+	}
 }

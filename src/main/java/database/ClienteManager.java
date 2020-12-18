@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
+import application.ClienteHolder;
 import entidade.Carro;
 import entidade.Cliente;
 
@@ -13,7 +13,7 @@ public class ClienteManager extends TableManager<Cliente> {
 	public ClienteManager() {
 		super("CREATE TABLE IF NOT EXISTS clientes(" + "CPF VARCHAR PRIMARY KEY, " + "nome VARCHAR NOT NULL, "
 				+ "email VARCHAR NOT NULL, " + "senha VARCHAR NOT NULL, " + "telefone VARCHAR, "
-				+ "carroPlaca VARCHAR");
+				+ "carroPlaca VARCHAR, FOREIGN KEY(carroPlaca) REFERENCES carros(placa));");
 	}
 
 	public ArrayList<Cliente> buscarTodos() throws SQLException {
@@ -55,16 +55,19 @@ public class ClienteManager extends TableManager<Cliente> {
 
 	public void devolverCarro(Cliente cliente) throws SQLException {
 		Banco.conexao.createStatement()
-				.execute("UPDATE carros SET clienteCPF = NULL WHERE placa = '" + cliente.getCarroPlaca() + "'");
+				.execute("UPDATE clientes SET carroPlaca = NULL WHERE CPF = '" + cliente.getCPF() + "'");
+		Banco.conexao.createStatement()
+				.execute("UPDATE carros SET clienteCPF = NULL WHERE clienteCPF = '" + cliente.getCPF() + "'");
 	}
 
 	public void alugarCarro(Cliente cliente, Carro carro) throws SQLException {
-		devolverCarro(cliente);
-
+		// devolverCarro(cliente);
+		
 		Banco.conexao.createStatement().execute(
 				"UPDATE clientes SET carroPlaca = '" + carro.getPlaca() + "' WHERE CPF = '" + cliente.getCPF() + "'");
 		Banco.conexao.createStatement().execute(
 				"UPDATE carros SET clienteCPF = '" + cliente.getCPF() + "' WHERE placa = '" + carro.getPlaca() + "'");
+		atualizarCliente(cliente.getCPF(), "placaCarro", carro.getPlaca());
 	}
 
 	public void atualizarCliente(String CPF, String coluna, String novoValor) throws SQLException {

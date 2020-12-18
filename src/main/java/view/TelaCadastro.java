@@ -46,8 +46,6 @@ public class TelaCadastro {
 			erroCadastro.showAndWait();
 		} else {
 			
-			//Cliente cliente = new Cliente(txtCPF.getText(), txtNome.getText(), txtEmail.getText(), txtSenha.getText(), txtTelefone.getText());
-			
 			Main.clienteManager.inserir(new Cliente(txtCPF.getText(), txtNome.getText(), txtEmail.getText(), txtSenha.getText(), txtTelefone.getText()));
 			
 			Stage stage = (Stage) botao.getScene().getWindow();
