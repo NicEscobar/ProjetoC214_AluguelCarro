@@ -32,7 +32,7 @@ public class TestCliente {
 	public void AddCarro() {
 		
 		String c;
-		c = "Jessica, 123, 110, je@,";
+		c = "Jessica";
 		String s;
 		s = cliente.toString();
 		
