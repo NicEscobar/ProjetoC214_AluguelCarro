@@ -1,48 +1,43 @@
 package TestClass;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import entidade.Carro;
 import entidade.Cliente;
 
 public class TestCliente {
 
 	Cliente cliente;
-	Carro carro;
 	
 	@Before
 	public void beforeTest() {
-		cliente = new Cliente();
-		carro = new Carro();
+		cliente = new Cliente("110","Jessica","je@","123","(35)9",null);
 		
 	}
 	
 	@Test
-	public void AddCliente() {
+	public void GetCliente() {
 		
-		cliente.setNome("Nicole");
-		cliente.setCpf("110.345");
-		cliente.setEmail("nicole@");
-		cliente.setId(0);
-		cliente.setSenha("123");
-		cliente.setTell(3594);
-		
-		assertEquals("Nicole",cliente.getNome());
+		assertEquals("Jessica",cliente.getNome());
 		assertEquals("123",cliente.getSenha());
+		assertEquals("110",cliente.getCPF());
+		assertEquals("je@",cliente.getEmail());
+		assertEquals("(35)9",cliente.getTelefone());
 		
 	}
 	@Test
 	public void AddCarro() {
 		
-		carro.setMarca("Ford");
-		carro.setModelo("Hylux");
+		String c;
+		c = "Jessica, 123, 110, je@,";
+		String s;
+		s = cliente.toString();
 		
-		cliente.setCarro(carro);
+		assertTrue(s.contains(c));
 		
-		assertEquals("Hylux",cliente.getCarro().getModelo());
 		
 	}
 	
