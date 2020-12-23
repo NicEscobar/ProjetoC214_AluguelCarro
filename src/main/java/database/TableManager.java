@@ -3,6 +3,8 @@ package database;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import holder.BancoHolder;
+
 public abstract class TableManager<T> {
 
 	public abstract ArrayList<T> buscarTodos() throws SQLException;
@@ -15,7 +17,7 @@ public abstract class TableManager<T> {
 	
 	private void criarTabela(String query) {
 		try {			
-			Banco.conexao.createStatement().execute(query);
+			BancoHolder.getInstance().getBanco().conexao.createStatement().execute(query);
 		} catch (SQLException e) {
 			System.out.print("Failed to create table: " + e);
 		}

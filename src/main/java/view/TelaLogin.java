@@ -16,11 +16,11 @@ import java.awt.Dialog;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import application.ClienteHolder;
-import application.Login;
 import application.Main;
 import database.ClienteManager;
 import entidade.Cliente;
+import holder.BancoHolder;
+import holder.ClienteHolder;
 import javafx.application.*;
 import javafx.fxml.*;
 
@@ -49,7 +49,7 @@ public class TelaLogin {
 			erroLogin.showAndWait();
 		} else {
 			
-			Cliente cliente = Main.clienteManager.login(txtEmail.getText(), txtSenha.getText());
+			Cliente cliente = BancoHolder.getInstance().getClienteManager().login(txtEmail.getText(), txtSenha.getText());
 
 			if (cliente == null) {
 				erroLogin.setTitle("Erro de Login");

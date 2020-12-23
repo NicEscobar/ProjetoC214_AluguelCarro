@@ -33,7 +33,7 @@
                               </AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="71.0" prefWidth="237.0">
                                  <children>
-                                    <Button layoutX="147.0" layoutY="41.0" mnemonicParsing="false" onAction="#acaoBotaoOK" text="ALUGAR" />
+                                    <Button fx:id="botaoAlugar" layoutX="147.0" layoutY="41.0" mnemonicParsing="false" onAction="#acaoBotaoOK" text="ALUGAR" />
                                     <Button fx:id="botaoSair" layoutX="44.0" layoutY="41.0" mnemonicParsing="false" onAction="#acaoBotaoSair" text="SAIR" />
                                  </children>
                               </AnchorPane>

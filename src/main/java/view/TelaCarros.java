@@ -3,11 +3,13 @@ package view;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 
-import application.ClienteHolder;
 import application.Main;
 import entidade.Carro;
 import entidade.Cliente;
+import holder.BancoHolder;
+import holder.ClienteHolder;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -21,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
@@ -47,6 +50,9 @@ public class TelaCarros {
 	@FXML
 	private Button botaoSair;
 
+	@FXML
+	private Button botaoAlugar;
+
 	private ObservableList<Carro> modelos;
 
 	ArrayList<Carro> carrosDisponiveis;
@@ -54,26 +60,19 @@ public class TelaCarros {
 	private Carro carroSelecionado;
 
 	@FXML
-	void acaoBotaoOK(ActionEvent event) {		
-		
+	void acaoBotaoOK(ActionEvent event) {
+
 		Alert confirma = new Alert(Alert.AlertType.CONFIRMATION);
 		Alert aviso = new Alert(Alert.AlertType.WARNING);
 
 		try {
-						
-			if (Main.clienteManager.buscarPrimeiro(ClienteHolder.getInstance().getCliente().getCPF()).getCarroPlaca() != null) {
-				aviso.setTitle("Aviso!!");
-				aviso.setContentText("Impossível alugar outro carro");
-				aviso.setContentText("Você já possui um carro alugado");
-				aviso.showAndWait();
-			} else {
-				confirma.setTitle("Confirmar!");
-				confirma.setContentText("Deseja mesmo alugar esse automóvel?");
-				confirma.showAndWait();
-				Main.clienteManager.alugarCarro(ClienteHolder.getInstance().getCliente(), carroSelecionado);
-
+			confirma.setTitle("Confirmar!");
+			confirma.setHeaderText("Deseja mesmo alugar esse carro?");
+			confirma.setContentText("Vai custar " + String.format("%.2f", carroSelecionado.getAluguel()));
+			Optional<ButtonType> result = confirma.showAndWait();
+			if (result.isPresent() && result.get() == ButtonType.OK) {
+				BancoHolder.getInstance().getClienteManager().alugarCarro(ClienteHolder.getInstance().getCliente(), carroSelecionado);
 			}
-
 		} catch (SQLException e) {
 		}
 
@@ -107,8 +106,11 @@ public class TelaCarros {
 	@FXML
 	void initialize() {
 
+		botaoAlugar.setVisible(false);
+		botaoAlugar.setManaged(false);
+
 		try {
-			carrosDisponiveis = Main.carroManager.buscarDisponiveis();
+			carrosDisponiveis = BancoHolder.getInstance().getCarroManager().buscarDisponiveis();
 		} catch (SQLException e) {
 
 		}
@@ -121,8 +123,11 @@ public class TelaCarros {
 			@Override
 			public void changed(ObservableValue<? extends Carro> observable, Carro oldValue, Carro newValue) {
 
+				botaoAlugar.setVisible(true);
+				botaoAlugar.setManaged(true);
+
 				lblMarca.setText(newValue.getMarca());
-				lblPreco.setText(newValue.getAluguel() + "");
+				lblPreco.setText(String.format("%.2f", newValue.getAluguel()));
 				lblPlaca.setText(newValue.getPlaca());
 
 				carroSelecionado = newValue;

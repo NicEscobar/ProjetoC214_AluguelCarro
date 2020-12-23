@@ -7,7 +7,10 @@ import database.Banco;
 import database.CarroManager;
 import database.ClienteManager;
 import entidade.Carro;
+import entidade.CarroFactory;
 import entidade.Cliente;
+import entidade.ClienteFactory;
+import holder.BancoHolder;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,23 +18,28 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
-	public static CarroManager carroManager;
-	public static ClienteManager clienteManager;
-
-	private static void startDatabase() {
-		Banco.conectar("banco");
-		clienteManager = new ClienteManager();
-		carroManager = new CarroManager();
-	}
+//
+//	public static CarroManager carroManager;
+//	public static ClienteManager clienteManager;
+//
+//	private static void startDatabase() {
+//		Banco.conectar("banco");
+//		clienteManager = new ClienteManager();
+//		carroManager = new CarroManager();
+//	}
 
 	private static void registerCars() {
 		try {
-			carroManager.inserir(new Carro("ABC1D23", "Gol G5", "Volkswagen", 120.00));
-			carroManager.inserir(new Carro("GUG2A24", "Punto 2014", "Fiat", 130.10));
-			carroManager.inserir(new Carro("BOL4C47", "Tempra", "Fiat", 30.49));
-			carroManager.inserir(new Carro("TRI5T40", "Chevet", "Chervrolet", 68.49));
-			carroManager.inserir(new Carro("XEQ3T17", "HB20", "Hyundai", 139.49));
+			BancoHolder.getInstance().getCarroManager()
+					.inserir(CarroFactory.criaNovoCarro("ABC1D23", "Gol G5", "Volkswagen", 120.00));
+			BancoHolder.getInstance().getCarroManager()
+					.inserir(CarroFactory.criaNovoCarro("GUG2A24", "Punto 2014", "Fiat", 130.10));
+			BancoHolder.getInstance().getCarroManager()
+					.inserir(CarroFactory.criaNovoCarro("BOL4C47", "Tempra", "Fiat", 30.49));
+			BancoHolder.getInstance().getCarroManager()
+					.inserir(CarroFactory.criaNovoCarro("TRI5T40", "Chevet", "Chervrolet", 68.49));
+			BancoHolder.getInstance().getCarroManager()
+					.inserir(CarroFactory.criaNovoCarro("XEQ3T17", "HB20", "Hyundai", 139.49));
 		} catch (SQLException e) {
 			System.out.println("Failed to register cars:" + e);
 		}
@@ -39,8 +47,8 @@ public class Main extends Application {
 
 	private static void registerClients() {
 		try {
-			clienteManager
-					.inserir(new Cliente("00000000000", "Gustavo Pessa", "guga@teste.com", "123456", "3599999999"));
+			BancoHolder.getInstance().getClienteManager().inserir(
+					ClienteFactory.criaNovoCliente("00000000000", "Gustavo Pessa", "guga@teste.com", "123456"));
 		} catch (SQLException e) {
 			System.out.println("Failed to register users:" + e);
 		}
@@ -48,14 +56,14 @@ public class Main extends Application {
 
 	private static void rentCar() {
 		try {
-			Cliente logedIn = clienteManager.login("guga@teste.com", "123456");
-			Carro carro = carroManager.buscarDisponiveis().get(0);
+			Cliente logedIn = BancoHolder.getInstance().getClienteManager().login("guga@teste.com", "123456");
+			Carro carro = BancoHolder.getInstance().getCarroManager().buscarDisponiveis().get(0);
 
-			clienteManager.alugarCarro(logedIn, carro);
+			BancoHolder.getInstance().getClienteManager().alugarCarro(logedIn, carro);
 
 			System.out.println("Carro Alugado:");
-			System.out.println(clienteManager.buscarPrimeiro(logedIn.getCPF()));
-			System.out.println(carroManager.buscarPrimeiro(carro.getPlaca()));
+			System.out.println(BancoHolder.getInstance().getClienteManager().buscarPrimeiro(logedIn.getCPF()));
+			System.out.println(BancoHolder.getInstance().getClienteManager().buscarPrimeiro(carro.getPlaca()));
 			System.out.println();
 		} catch (SQLException e) {
 			System.out.println("Failed to rent:" + e);
@@ -65,7 +73,7 @@ public class Main extends Application {
 	private static void printCars() {
 		System.out.println("--- Carros ---");
 		try {
-			ArrayList<Carro> carros = carroManager.buscarTodos();
+			ArrayList<Carro> carros = BancoHolder.getInstance().getCarroManager().buscarTodos();
 
 			for (Carro carro : carros) {
 				System.out.println(carro);
@@ -81,7 +89,7 @@ public class Main extends Application {
 		System.out.println("--- Clientes ---");
 		try {
 
-			ArrayList<Cliente> clientes = clienteManager.buscarTodos();
+			ArrayList<Cliente> clientes = BancoHolder.getInstance().getClienteManager().buscarTodos();
 
 			for (Cliente cliente : clientes) {
 				System.out.println(cliente);
@@ -94,23 +102,23 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-				
-		startDatabase();
+
+		BancoHolder.getInstance().criarBanco("banco");
 
 		// --- Extra ---
 		registerCars();
 		registerClients();
 
-		//rentCar();
+		// rentCar();
 
-		//printClients();
-		//printCars();
+		// printClients();
+		// printCars();
 		// -------------
-		
+
 		launch(args);
-		
-		Banco.desconectar();
-		
+
+		BancoHolder.getInstance().getBanco().desconectar();
+
 	}
 
 	@Override

@@ -3,10 +3,11 @@ package view;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import application.ClienteHolder;
 import application.Main;
 import entidade.Carro;
 import entidade.Cliente;
+import holder.BancoHolder;
+import holder.ClienteHolder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -79,8 +80,8 @@ public class TelaPerfil {
 	@FXML
 	public void acaoBotaoDevolver(ActionEvent event) throws IOException {
 		try {
-			Cliente clientAux = Main.clienteManager.buscarPrimeiro(cliente.getCPF());
-			Main.clienteManager.devolverCarro(clientAux);
+			Cliente clientAux = BancoHolder.getInstance().getClienteManager().buscarPrimeiro(cliente.getCPF());
+			BancoHolder.getInstance().getClienteManager().devolverCarro(clientAux);
 
 			lblMarca.setText("N/A");
 			lblPlaca.setText("N/A");
@@ -99,7 +100,7 @@ public class TelaPerfil {
 	@FXML
 	public void initialize() {
 		try {
-			Cliente clientAux = Main.clienteManager.buscarPrimeiro(cliente.getCPF());
+			Cliente clientAux = BancoHolder.getInstance().getClienteManager().buscarPrimeiro(cliente.getCPF());
 
 			lblNome.setText(clientAux.getNome());
 			lblEmail.setText(clientAux.getEmail());
@@ -113,7 +114,7 @@ public class TelaPerfil {
 				botaoDevolver.setVisible(true);
 				botaoDevolver.setManaged(true);
 				
-				Carro carro = Main.carroManager.buscarPrimeiro(clientAux.getCarroPlaca());
+				Carro carro = BancoHolder.getInstance().getCarroManager().buscarPrimeiro(clientAux.getCarroPlaca());
 
 				if (carro != null) {
 					lblMarca.setText(carro.getMarca());

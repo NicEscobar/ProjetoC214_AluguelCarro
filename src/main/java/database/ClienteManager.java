@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import entidade.Carro;
 import entidade.Cliente;
+import entidade.ClienteFactory;
+import holder.BancoHolder;
 
 public class ClienteManager extends TableManager<Cliente> {
 
@@ -18,10 +20,10 @@ public class ClienteManager extends TableManager<Cliente> {
 	public ArrayList<Cliente> buscarTodos() throws SQLException {
 		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 
-		ResultSet rs = Banco.conexao.prepareStatement("SELECT * FROM clientes").executeQuery();
+		ResultSet rs = BancoHolder.getInstance().getBanco().conexao.prepareStatement("SELECT * FROM clientes").executeQuery();
 
 		while (rs.next()) {
-			Cliente cliente = new Cliente(rs.getString("CPF"), rs.getString("nome"), rs.getString("email"),
+			Cliente cliente = ClienteFactory.criaCliente(rs.getString("CPF"), rs.getString("nome"), rs.getString("email"),
 					rs.getString("senha"), rs.getString("telefone"), rs.getString("carroPlaca"));
 			clientes.add(cliente);
 		}
@@ -30,14 +32,14 @@ public class ClienteManager extends TableManager<Cliente> {
 	}
 
 	public Cliente buscarPrimeiro(String CPF) throws SQLException {
-		ResultSet rs = Banco.conexao.prepareStatement("SELECT * FROM clientes WHERE CPF = '" + CPF + "'")
+		ResultSet rs = BancoHolder.getInstance().getBanco().conexao.prepareStatement("SELECT * FROM clientes WHERE CPF = '" + CPF + "'")
 				.executeQuery();
 
 		return criarCliente(rs);
 	}
 
 	public Cliente login(String email, String senha) throws SQLException {
-		ResultSet rs = Banco.conexao
+		ResultSet rs = BancoHolder.getInstance().getBanco().conexao
 				.prepareStatement(
 						"SELECT * FROM clientes WHERE email = '" + email + "' AND " + " senha = '" + senha + "'")
 				.executeQuery();
@@ -46,31 +48,31 @@ public class ClienteManager extends TableManager<Cliente> {
 	}
 
 	public void inserir(Cliente cliente) throws SQLException {
-		Banco.conexao.createStatement()
+		BancoHolder.getInstance().getBanco().conexao.createStatement()
 				.execute("INSERT INTO clientes(CPF, nome, email, senha, telefone) VALUES (" + "'" + cliente.getCPF()
 						+ "'," + "'" + cliente.getNome() + "'," + "'" + cliente.getEmail() + "'," + "'"
 						+ cliente.getSenha() + "'," + "'" + cliente.getTelefone() + "'" + ")");
 	}
 
 	public void devolverCarro(Cliente cliente) throws SQLException {
-		Banco.conexao.createStatement()
+		BancoHolder.getInstance().getBanco().conexao.createStatement()
 				.execute("UPDATE clientes SET carroPlaca = NULL WHERE CPF = '" + cliente.getCPF() + "'");
-		Banco.conexao.createStatement()
+		BancoHolder.getInstance().getBanco().conexao.createStatement()
 				.execute("UPDATE carros SET clienteCPF = NULL WHERE clienteCPF = '" + cliente.getCPF() + "'");
 	}
 
 	public void alugarCarro(Cliente cliente, Carro carro) throws SQLException {
 		// devolverCarro(cliente);
 		
-		Banco.conexao.createStatement().execute(
+		BancoHolder.getInstance().getBanco().conexao.createStatement().execute(
 				"UPDATE clientes SET carroPlaca = '" + carro.getPlaca() + "' WHERE CPF = '" + cliente.getCPF() + "'");
-		Banco.conexao.createStatement().execute(
+		BancoHolder.getInstance().getBanco().conexao.createStatement().execute(
 				"UPDATE carros SET clienteCPF = '" + cliente.getCPF() + "' WHERE placa = '" + carro.getPlaca() + "'");
 		atualizarCliente(cliente.getCPF(), "placaCarro", carro.getPlaca());
 	}
 
 	public void atualizarCliente(String CPF, String coluna, String novoValor) throws SQLException {
-		Banco.conexao.createStatement()
+		BancoHolder.getInstance().getBanco().conexao.createStatement()
 				.execute("UPDATE clientes SET " + coluna + " = '" + novoValor + "' WHERE CPF = '" + CPF + "'");
 	}
 
@@ -79,7 +81,7 @@ public class ClienteManager extends TableManager<Cliente> {
 			return null;
 		}
 
-		Cliente cliente = new Cliente(rs.getString("CPF"), rs.getString("nome"), rs.getString("email"),
+		Cliente cliente = ClienteFactory.criaCliente(rs.getString("CPF"), rs.getString("nome"), rs.getString("email"),
 				rs.getString("senha"), rs.getString("telefone"), rs.getString("carroPlaca"));
 		return cliente;
 	}

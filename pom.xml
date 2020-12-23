@@ -39,6 +39,11 @@
 			<artifactId>javafx-controls</artifactId>
 			<version>15.0.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>15.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -103,7 +108,7 @@
 				<artifactId>javafx-maven-plugin</artifactId>
 				<version>0.0.5</version>
 				<configuration>
-					<mainClass>HelloFX</mainClass>
+					<mainClass>application.Main</mainClass>
 				</configuration>
 			</plugin>
 

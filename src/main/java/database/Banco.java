@@ -2,11 +2,11 @@ package database;
 
 import java.sql.*;
 
-public class Banco {
+public final class Banco {
 
-	static Connection conexao;
+	public Connection conexao;
 
-	public static void conectar(String nome) {
+	public void conectar(String nome) {
 		try {
 			conexao = DriverManager.getConnection("jdbc:sqlite:" + nome + ".db");
 			System.out.println("Conexão realizada !!!!");
@@ -16,7 +16,7 @@ public class Banco {
 		}
 	}
 
-	public static void desconectar() {
+	public void desconectar() {
 		try {
 			conexao.close();
 			System.out.println("Conexão finalizada !!!!");

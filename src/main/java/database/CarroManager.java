@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidade.Carro;
+import entidade.CarroFactory;
+import holder.BancoHolder;
 
 public class CarroManager extends TableManager<Carro> {
 
@@ -15,32 +17,34 @@ public class CarroManager extends TableManager<Carro> {
 	}
 
 	public ArrayList<Carro> buscarTodos() throws SQLException {
-		ResultSet rs = Banco.conexao.prepareStatement("SELECT * FROM carros").executeQuery();
+		ResultSet rs = BancoHolder.getInstance().getBanco().conexao.prepareStatement("SELECT * FROM carros")
+				.executeQuery();
 
 		return construirLista(rs);
 	}
 
 	public ArrayList<Carro> buscarDisponiveis() throws SQLException {
-		ResultSet rs = Banco.conexao.prepareStatement("SELECT * FROM carros WHERE clienteCPF IS NULL").executeQuery();
+		ResultSet rs = BancoHolder.getInstance().getBanco().conexao
+				.prepareStatement("SELECT * FROM carros WHERE clienteCPF IS NULL").executeQuery();
 
 		return construirLista(rs);
 	}
 
 	public Carro buscarPrimeiro(String placa) throws SQLException {
-		ResultSet rs = Banco.conexao.prepareStatement("SELECT * FROM carros WHERE placa = '" + placa + "'")
-				.executeQuery();
+		ResultSet rs = BancoHolder.getInstance().getBanco().conexao
+				.prepareStatement("SELECT * FROM carros WHERE placa = '" + placa + "'").executeQuery();
 
 		if (rs.next() == false) {
 			return null;
 		}
 
-		Carro carro = new Carro(rs.getString("placa"), rs.getString("modelo"), rs.getString("marca"),
+		Carro carro = CarroFactory.criaCarro(rs.getString("placa"), rs.getString("modelo"), rs.getString("marca"),
 				rs.getFloat("aluguel"), rs.getString("clienteCPF"));
 		return carro;
 	}
 
 	public void inserir(Carro carro) throws SQLException {
-		Banco.conexao.createStatement()
+		BancoHolder.getInstance().getBanco().conexao.createStatement()
 				.execute("INSERT INTO carros(placa, marca, modelo, aluguel) VALUES (" + "'" + carro.getPlaca() + "',"
 						+ "'" + carro.getMarca() + "'," + "'" + carro.getModelo() + "'," + "'" + carro.getAluguel()
 						+ "')");
@@ -50,7 +54,7 @@ public class CarroManager extends TableManager<Carro> {
 		ArrayList<Carro> carros = new ArrayList<Carro>();
 
 		while (rs.next()) {
-			Carro carro = new Carro(rs.getString("placa"), rs.getString("modelo"), rs.getString("marca"),
+			Carro carro = CarroFactory.criaCarro(rs.getString("placa"), rs.getString("modelo"), rs.getString("marca"),
 					rs.getFloat("aluguel"), rs.getString("clienteCPF"));
 			carros.add(carro);
 		}

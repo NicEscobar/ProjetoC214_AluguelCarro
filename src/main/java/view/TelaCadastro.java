@@ -2,11 +2,11 @@ package view;
 
 import java.sql.SQLException;
 
-import application.Cadastro;
-import application.Login;
 import application.Main;
 import database.ClienteManager;
 import entidade.Cliente;
+import entidade.ClienteFactory;
+import holder.BancoHolder;
 import javafx.application.*;
 import javafx.fxml.*;
 import javafx.scene.control.Alert;
@@ -35,7 +35,7 @@ public class TelaCadastro {
 	private TextField txtTelefone;
 
 	@FXML
-	private void acaoBotao() throws SQLException {
+	private void acaoBotao() {
 		Alert erroCadastro = new Alert(Alert.AlertType.ERROR);
 
 		if (txtNome.getText().trim().isEmpty() || txtEmail.getText().trim().isEmpty()
@@ -45,11 +45,19 @@ public class TelaCadastro {
 			erroCadastro.setContentText("Favor, entre com todos os dados necessários!");
 			erroCadastro.showAndWait();
 		} else {
-			
-			Main.clienteManager.inserir(new Cliente(txtCPF.getText(), txtNome.getText(), txtEmail.getText(), txtSenha.getText(), txtTelefone.getText()));
+			try {
+			BancoHolder.getInstance().getClienteManager().inserir(ClienteFactory.criaNovoCliente(txtCPF.getText(), txtNome.getText(), txtEmail.getText(), txtSenha.getText(), txtTelefone.getText()));
 			
 			Stage stage = (Stage) botao.getScene().getWindow();
 			stage.close();
+			} catch(SQLException e) {
+								
+				if (e.getErrorCode() == 19) {
+					erroCadastro.setTitle("Erro de Cadstro!");
+					erroCadastro.setContentText("CPF já cadastrado!");
+					erroCadastro.showAndWait();
+				}
+			}
 		}
 		
 	}
