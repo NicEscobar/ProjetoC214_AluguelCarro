@@ -10,6 +10,7 @@ install:
 script: 
 - mvn clean test
 - mvn clean verify
+- mvn clean install -Pclean-database
 after_success:
   - bash <(curl -s https://codecov.io/bash) -t 
 
