@@ -44,6 +44,7 @@
 			<artifactId>javafx-fxml</artifactId>
 			<version>11.0.2</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
@@ -52,7 +53,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<release>11</release>  <!--or <release>10</release> -->
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 
