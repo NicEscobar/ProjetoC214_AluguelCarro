@@ -9,9 +9,9 @@
 
 ## Descrição
 
- Linguagem: Java
+Linguagem: Java
 
- IDE: Eclipse
+IDE: Eclipse
 
 O projeto é uma plataforma de simulação de aluguel de carro.
 Ao se cadastrar na plataforma e fazer o login, o cliente tem acesso a uma lista de carros disponíveis para ser alugado. O cliente tem a opção de escolher um carro, entre uma lista com vários modelos, e informar a plataforma qual quer alugar.
@@ -52,7 +52,7 @@ Nessa tela é listado os carros disponíveis no banco de dados.
 
 Pacotes da Biblioteca e Frameworks do Java utilizadas são:
 
-[JavaFX](https://openjfx.io/) (Interface com Banco de Dados)
+[JavaFX](https://openjfx.io/) (Interface)
 
 [SQLite](https://www.sqlite.org/) (Banco de dados)
 
