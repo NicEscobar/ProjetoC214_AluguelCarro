@@ -4,10 +4,8 @@ addons:
     packages:
       - ant
 jdk: openjdk8
-install:
-- mvc install 
+install: 
 - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script: 
 - mvn clean test
-- mvn clean verify 
-- mvn install
+- mvn clean verify
