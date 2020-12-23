@@ -54,8 +54,9 @@ Pacotes da Biblioteca e Frameworks do Java utilizadas são:
 
 ## 📃 Como usar
 
-Linguagem: Java
-IDE: Eclipse
+####Linguagem: Java
+
+####IDE: Eclipse
 
 Clone este repositório na sua máquina local
 
