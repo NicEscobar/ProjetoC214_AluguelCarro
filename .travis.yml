@@ -6,6 +6,10 @@ addons:
 jdk: openjdk8
 install: 
 - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+- mvn cobertura:cobertura
 script: 
 - mvn clean test
 - mvn clean verify
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -t 
+
