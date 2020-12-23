@@ -1,22 +1,15 @@
 language: java
-addons:
-  apt:
-    packages:
-      - ant
+
 jdk:
   - oraclejdk8
-  - oraclejdk9
   - oraclejdk11
-  - openjdk8
-  - openjdk-ea
 
 install: 
 - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-- mvn cobertura:cobertura
+
 script: 
 - mvn clean test
 - mvn clean verify
 - mvn clean install -Pclean-database
-after_success:
-  - bash <(curl -s https://codecov.io/bash) -t 
+ 
 
