@@ -18,20 +18,26 @@ ListarCarros: Nessa tela é listado os carros disponíveis no banco de dados.
 
 ## Funcionalidades
 
+- [x] Cadastro de cliente
+- [x] Login de cliente
+- [x] Listagem de carros
+- [x] Status do cliente
 
-## Bibliotecas utilizadas
+## Ferramentas
 
 Pacotes da Biblioteca e Frameworks do Java utilizadas são:
 
-JavaFX (Interface com Banco de Dados)
+[JavaFX](https://openjfx.io/) (Interface com Banco de Dados)
 
-Java Utility Library (Utilitários de propósito geral)
+[Java Utility Library](https://docs.oracle.com/javase/8/docs/api/java/util/package-summary.html) (Utilitários de propósito geral)
 
-Jacoco (Ferramenta para calcular métricas de código fonte)
+[Jacoco](https://www.jacoco.org/jacoco/trunk/doc/) (Ferramenta para calcular métricas de código fonte)
 
-Mockito (Framework para mock)
+[Mockito](https://site.mockito.org/) (Framework para mock)
 
-JUnit (Framework para Teste de Unidade)
+[JUnit](https://junit.org/junit5/) (Framework para Teste de Unidade) 
+
+[Travis](https://travis-ci.org/) (Integração Contínua)
 
 ## CI Badge
 
