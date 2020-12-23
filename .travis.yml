@@ -3,7 +3,13 @@ addons:
   apt:
     packages:
       - ant
-jdk: openjdk8
+jdk:
+  - oraclejdk8
+  - oraclejdk9
+  - oraclejdk11
+  - openjdk8
+  - openjdk-ea
+
 install: 
 - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 - mvn cobertura:cobertura
