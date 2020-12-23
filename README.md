@@ -8,7 +8,8 @@
 ## Descrição
 
 O projeto é uma plataforma de simulação de aluguel de carro.
-Ao se dacastrar na plataforma, o cliente tem acesso a uma lista de carros disponíveis para ser alugado. O cliente tem  a opção  de escolher um carro, fazer o pagamento e                                                             
+Ao se cadrastrar na plataforma e fazer o login, o cliente tem acesso a uma lista de carros disponíveis para ser alugado. O cliente tem  a opção  de escolher um carro, entre uma lista com vários modelos, e informar a plataforma qual quer alugar.
+A ideia é que o cliente utilize a plataforma para visualizar os modelos disponivel e fazer a reserva. Após fazer a reserva, o cliente deve ir na agencia retirar o carro e realizar o pagamento.  
 
 ## Escopo
 
@@ -29,7 +30,7 @@ Nessa tela é listado os carros disponíveis no banco de dados.
 - [x] Cadastro de cliente
 - [x] Login de cliente
 - [x] Listagem de carros
-- [x] Status do cliente
+- [x] Perfil do cliente
 
 ## 🛠️ Ferramentas
 
@@ -48,8 +49,6 @@ Pacotes da Biblioteca e Frameworks do Java utilizadas são:
 [Mockito](https://site.mockito.org/) (Framework para mock)
 
 [JUnit](https://junit.org/junit5/) (Framework para Teste de Unidade)
-
-## Diagrama de classes
 
 ## 📃 Como usar
 
