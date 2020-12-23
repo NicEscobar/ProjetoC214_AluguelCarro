@@ -1,6 +1,11 @@
 language: java
+addons:
+  apt:
+    packages:
+      - ant
 jdk: openjdk8
-install: 
+install:
+- mvc install 
 - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script: 
 - mvn clean test
