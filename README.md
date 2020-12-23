@@ -9,6 +9,10 @@
 
 ## Descrição
 
+ Linguagem: Java
+
+ IDE: Eclipse
+
 O projeto é uma plataforma de simulação de aluguel de carro.
 Ao se cadastrar na plataforma e fazer o login, o cliente tem acesso a uma lista de carros disponíveis para ser alugado. O cliente tem a opção de escolher um carro, entre uma lista com vários modelos, e informar a plataforma qual quer alugar.
 A ideia é que o cliente utilize a plataforma para visualizar os modelos disponível e fazer a reserva. Após fazer a reserva, o cliente deve ir na agencia retirar o carro e realizar o pagamento.
@@ -59,9 +63,6 @@ Pacotes da Biblioteca e Frameworks do Java utilizadas são:
 [JUnit](https://junit.org/junit5/) (Framework para Teste de Unidade)
 
 ## 📃 Como usar
-
-Linguagem: Java
-IDE: Eclipse
 
 Clone este repositório na sua máquina local
 
