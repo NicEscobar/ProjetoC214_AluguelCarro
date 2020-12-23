@@ -5,6 +5,8 @@
 
 # Plataforma para Alugar Carro
 
+![carro](https://user-images.githubusercontent.com/41171203/103043822-07332700-455d-11eb-9871-3f9a1edb69a0.png)
+
 ## Descrição
 
 O projeto é uma plataforma de simulação de aluguel de carro.
