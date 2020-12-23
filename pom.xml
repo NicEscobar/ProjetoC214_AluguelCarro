@@ -37,12 +37,12 @@
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
-			<version>15.0.1</version>
+			<version>11.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
-			<version>15.0.1</version>
+			<version>11.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
@@ -88,8 +88,8 @@
 				</executions>
 
 			</plugin>
-			
-			
+
+
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
