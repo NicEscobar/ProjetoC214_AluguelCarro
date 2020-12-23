@@ -9,7 +9,7 @@ public class Banco {
 	public void conectar(String nome) {
 		try {
 			conexao = DriverManager.getConnection("jdbc:sqlite:" + nome + ".db");
-			System.out.println("Conexão realizada !!!!");
+			System.out.println("Conexao realizada !!!!");
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -21,7 +21,7 @@ public class Banco {
 		try {
 			conexao.close();
 			conexao = null;
-			System.out.println("Conexão finalizada !!!!");
+			System.out.println("Conexao finalizada !!!!");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}

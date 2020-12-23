@@ -42,7 +42,7 @@ public class TelaCadastro {
 				|| txtSenha.getText().trim().isEmpty() || txtCPF.getText().trim().isEmpty()
 				|| txtTelefone.getText().trim().isEmpty()) {
 			erroCadastro.setTitle("Erro de Cadstro!");
-			erroCadastro.setContentText("Favor, entre com todos os dados necessários!");
+			erroCadastro.setContentText("Favor, entre com todos os dados necessarios!");
 			erroCadastro.showAndWait();
 		} else {
 			try {
@@ -54,7 +54,7 @@ public class TelaCadastro {
 								
 				if (e.getErrorCode() == 19) {
 					erroCadastro.setTitle("Erro de Cadstro!");
-					erroCadastro.setContentText("CPF já cadastrado!");
+					erroCadastro.setContentText("CPF ja cadastrado!");
 					erroCadastro.showAndWait();
 				}
 			}

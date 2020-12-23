@@ -45,7 +45,7 @@ public class TelaLogin {
 		if (txtEmail.getText().trim().isEmpty() && txtSenha.getText().trim().isEmpty()) {
 			erroLogin.setTitle("Erro de Login");
 			erroLogin.setHeaderText("Campos em branco!");
-			erroLogin.setContentText("Favor, entre com os dados necessários");
+			erroLogin.setContentText("Favor, entre com os dados necessarios");
 			erroLogin.showAndWait();
 		} else {
 			
@@ -53,7 +53,7 @@ public class TelaLogin {
 
 			if (cliente == null) {
 				erroLogin.setTitle("Erro de Login");
-				erroLogin.setHeaderText("Cliente não encontrado!");
+				erroLogin.setHeaderText("Cliente nao encontrado!");
 				erroLogin.showAndWait();
 			} else {				
 
