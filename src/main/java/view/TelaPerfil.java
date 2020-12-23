@@ -8,7 +8,6 @@ import entidade.Carro;
 import entidade.Cliente;
 import holder.BancoHolder;
 import holder.ClienteHolder;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -54,13 +53,13 @@ public class TelaPerfil {
 	private Cliente cliente = ClienteHolder.getInstance().getCliente();
 
 	@FXML
-	public void acaoBotaoSair(ActionEvent event) {
+	public void acaoBotaoSair() {
 		Stage stage = (Stage) botaoSair.getScene().getWindow();
 		stage.close();
 	}
 
 	@FXML
-	public void acaoBotaoAlugar(ActionEvent event) throws IOException {
+	public void acaoBotaoAlugar() throws IOException {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLTelaCarros.fxml"));
 			Parent root1 = (Parent) fxmlLoader.load();
@@ -78,7 +77,7 @@ public class TelaPerfil {
 	}
 
 	@FXML
-	public void acaoBotaoDevolver(ActionEvent event) throws IOException {
+	public void acaoBotaoDevolver() throws IOException {
 		try {
 			Cliente clientAux = BancoHolder.getInstance().getClienteManager().buscarPrimeiro(cliente.getCPF());
 			BancoHolder.getInstance().getClienteManager().devolverCarro(clientAux);
