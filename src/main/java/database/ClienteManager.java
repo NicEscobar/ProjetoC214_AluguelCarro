@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,9 +11,9 @@ import entidade.ClienteFactory;
 import holder.BancoHolder;
 
 public class ClienteManager extends TableManager<Cliente> {
-
-	public ClienteManager() {
-		super("CREATE TABLE IF NOT EXISTS clientes(" + "CPF VARCHAR PRIMARY KEY, " + "nome VARCHAR NOT NULL, "
+	
+	public ClienteManager(Connection conexao) {
+		super(conexao, "CREATE TABLE IF NOT EXISTS clientes(" + "CPF VARCHAR PRIMARY KEY, " + "nome VARCHAR NOT NULL, "
 				+ "email VARCHAR NOT NULL, " + "senha VARCHAR NOT NULL, " + "telefone VARCHAR, "
 				+ "carroPlaca VARCHAR, FOREIGN KEY(carroPlaca) REFERENCES carros(placa));");
 	}
@@ -20,7 +21,7 @@ public class ClienteManager extends TableManager<Cliente> {
 	public ArrayList<Cliente> buscarTodos() throws SQLException {
 		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 
-		ResultSet rs = BancoHolder.getInstance().getBanco().conexao.prepareStatement("SELECT * FROM clientes").executeQuery();
+		ResultSet rs = this.conexao.prepareStatement("SELECT * FROM clientes").executeQuery();
 
 		while (rs.next()) {
 			Cliente cliente = ClienteFactory.criaCliente(rs.getString("CPF"), rs.getString("nome"), rs.getString("email"),
@@ -32,14 +33,14 @@ public class ClienteManager extends TableManager<Cliente> {
 	}
 
 	public Cliente buscarPrimeiro(String CPF) throws SQLException {
-		ResultSet rs = BancoHolder.getInstance().getBanco().conexao.prepareStatement("SELECT * FROM clientes WHERE CPF = '" + CPF + "'")
+		ResultSet rs = this.conexao.prepareStatement("SELECT * FROM clientes WHERE CPF = '" + CPF + "'")
 				.executeQuery();
 
 		return criarCliente(rs);
 	}
 
 	public Cliente login(String email, String senha) throws SQLException {
-		ResultSet rs = BancoHolder.getInstance().getBanco().conexao
+		ResultSet rs = conexao
 				.prepareStatement(
 						"SELECT * FROM clientes WHERE email = '" + email + "' AND " + " senha = '" + senha + "'")
 				.executeQuery();
@@ -48,31 +49,29 @@ public class ClienteManager extends TableManager<Cliente> {
 	}
 
 	public void inserir(Cliente cliente) throws SQLException {
-		BancoHolder.getInstance().getBanco().conexao.createStatement()
+		this.conexao.createStatement()
 				.execute("INSERT INTO clientes(CPF, nome, email, senha, telefone) VALUES (" + "'" + cliente.getCPF()
 						+ "'," + "'" + cliente.getNome() + "'," + "'" + cliente.getEmail() + "'," + "'"
 						+ cliente.getSenha() + "'," + "'" + cliente.getTelefone() + "'" + ")");
 	}
 
 	public void devolverCarro(Cliente cliente) throws SQLException {
-		BancoHolder.getInstance().getBanco().conexao.createStatement()
+		this.conexao.createStatement()
 				.execute("UPDATE clientes SET carroPlaca = NULL WHERE CPF = '" + cliente.getCPF() + "'");
-		BancoHolder.getInstance().getBanco().conexao.createStatement()
+		this.conexao.createStatement()
 				.execute("UPDATE carros SET clienteCPF = NULL WHERE clienteCPF = '" + cliente.getCPF() + "'");
 	}
 
 	public void alugarCarro(Cliente cliente, Carro carro) throws SQLException {
-		// devolverCarro(cliente);
-		
-		BancoHolder.getInstance().getBanco().conexao.createStatement().execute(
+		this.conexao.createStatement().execute(
 				"UPDATE clientes SET carroPlaca = '" + carro.getPlaca() + "' WHERE CPF = '" + cliente.getCPF() + "'");
-		BancoHolder.getInstance().getBanco().conexao.createStatement().execute(
+		this.conexao.createStatement().execute(
 				"UPDATE carros SET clienteCPF = '" + cliente.getCPF() + "' WHERE placa = '" + carro.getPlaca() + "'");
 		atualizarCliente(cliente.getCPF(), "placaCarro", carro.getPlaca());
 	}
 
 	public void atualizarCliente(String CPF, String coluna, String novoValor) throws SQLException {
-		BancoHolder.getInstance().getBanco().conexao.createStatement()
+		this.conexao.createStatement()
 				.execute("UPDATE clientes SET " + coluna + " = '" + novoValor + "' WHERE CPF = '" + CPF + "'");
 	}
 

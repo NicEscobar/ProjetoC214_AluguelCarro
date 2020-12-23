@@ -31,8 +31,8 @@ public final class BancoHolder {
 		this.banco = new Banco();
 		this.banco.conectar(b);
 		
-		this.clienteManager = new ClienteManager();
-		this.carroManager = new CarroManager();
+		this.clienteManager = new ClienteManager(this.banco.conexao);
+		this.carroManager = new CarroManager(this.banco.conexao);
 	}
 
 	public Banco getBanco() {

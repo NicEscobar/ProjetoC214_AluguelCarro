@@ -2,7 +2,7 @@ package database;
 
 import java.sql.*;
 
-public final class Banco {
+public class Banco {
 
 	public Connection conexao;
 
@@ -17,12 +17,14 @@ public final class Banco {
 	}
 
 	public void desconectar() {
+		if (conexao == null) return;
 		try {
 			conexao.close();
+			conexao = null;
 			System.out.println("Conexão finalizada !!!!");
-
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		
 	}
 }

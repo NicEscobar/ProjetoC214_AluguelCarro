@@ -18,15 +18,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-//
-//	public static CarroManager carroManager;
-//	public static ClienteManager clienteManager;
-//
-//	private static void startDatabase() {
-//		Banco.conectar("banco");
-//		clienteManager = new ClienteManager();
-//		carroManager = new CarroManager();
-//	}
 
 	private static void registerCars() {
 		try {

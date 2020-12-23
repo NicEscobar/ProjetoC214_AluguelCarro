@@ -1,37 +1,37 @@
 package database;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidade.Carro;
 import entidade.CarroFactory;
-import holder.BancoHolder;
 
 public class CarroManager extends TableManager<Carro> {
 
-	public CarroManager() {
-		super("CREATE TABLE IF NOT EXISTS carros(" + "placa VARCHAR PRIMARY KEY, " + "marca VARCHAR NOT NULL, "
+	public CarroManager(Connection conexao) {
+		super(conexao, "CREATE TABLE IF NOT EXISTS carros(" + "placa VARCHAR PRIMARY KEY, " + "marca VARCHAR NOT NULL, "
 				+ "modelo VARCHAR NOT NULL, " + "aluguel REAL NOT NULL, " + "clienteCPF VARCHAR, "
 				+ "FOREIGN KEY(clienteCPF) REFERENCES clientes(CPF) " + ")");
 	}
 
 	public ArrayList<Carro> buscarTodos() throws SQLException {
-		ResultSet rs = BancoHolder.getInstance().getBanco().conexao.prepareStatement("SELECT * FROM carros")
+		ResultSet rs = this.conexao.prepareStatement("SELECT * FROM carros")
 				.executeQuery();
 
 		return construirLista(rs);
 	}
 
 	public ArrayList<Carro> buscarDisponiveis() throws SQLException {
-		ResultSet rs = BancoHolder.getInstance().getBanco().conexao
+		ResultSet rs = this.conexao
 				.prepareStatement("SELECT * FROM carros WHERE clienteCPF IS NULL").executeQuery();
 
 		return construirLista(rs);
 	}
 
 	public Carro buscarPrimeiro(String placa) throws SQLException {
-		ResultSet rs = BancoHolder.getInstance().getBanco().conexao
+		ResultSet rs = this.conexao
 				.prepareStatement("SELECT * FROM carros WHERE placa = '" + placa + "'").executeQuery();
 
 		if (rs.next() == false) {
@@ -44,7 +44,7 @@ public class CarroManager extends TableManager<Carro> {
 	}
 
 	public void inserir(Carro carro) throws SQLException {
-		BancoHolder.getInstance().getBanco().conexao.createStatement()
+		this.conexao.createStatement()
 				.execute("INSERT INTO carros(placa, marca, modelo, aluguel) VALUES (" + "'" + carro.getPlaca() + "',"
 						+ "'" + carro.getMarca() + "'," + "'" + carro.getModelo() + "'," + "'" + carro.getAluguel()
 						+ "')");
